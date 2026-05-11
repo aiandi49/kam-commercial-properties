@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAM Commercial — Tucson Property Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080c10;
+  --white: #f0ede8;
+  --slate: #111418;
+  --mid: #1a1f26;
+  --border: #222830;
+  --gold: #c8a043;
+  --gold-dim: rgba(200,160,67,0.12);
+  --gold-border: rgba(200,160,67,0.28);
+  --muted: #586070;
+  --text: #b8b4ac;
+  --green: #3fa870;
+  --red: #d85050;
+  --blue: #4a8cc8;
+  --blue-dim: rgba(74,140,200,0.12);
+  --blue-border: rgba(74,140,200,0.28);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Instrument Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  background: rgba(8,12,16,0.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  height: 62px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 24px;
+}
+.brand {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.brand span { color: var(--white); opacity: 0.4; }
+.topbar-divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+.nav-tabs { display: flex; gap: 2px; flex: 1; }
+.nav-tab {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 7px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  background: transparent;
+  text-decoration: none;
+}
+.nav-tab:hover { color: var(--white); background: var(--mid); }
+.nav-tab.active { color: var(--gold); background: var(--gold-dim); }
+.topbar-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.topbar-city {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--slate);
+  border-bottom: 1px solid var(--border);
+  padding: 44px 28px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(200,160,67,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 1320px; margin: 0 auto; position: relative; }
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 3.5vw, 50px);
+  font-weight: 800;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 400;
+}
+.hero-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 28px;
+  letter-spacing: 0.2px;
+}
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.filter-select {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 12px;
+  color: var(--white);
+  background: var(--mid);
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.filter-select:hover { border-color: var(--gold); }
+.filter-chip {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  background: var(--mid);
+  border: 1px solid var(--border);
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.filter-chip:hover, .filter-chip.active { color: var(--gold); border-color: var(--gold-border); background: var(--gold-dim); }
+.filter-chip.lease-chip:hover, .filter-chip.lease-chip.active { color: var(--blue); border-color: var(--blue-border); background: var(--blue-dim); }
+.results-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* ── MAIN ── */
+.main { max-width: 1320px; margin: 0 auto; padding: 32px 28px 80px; }
+.view-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.view-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+.section-header {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 20px 0 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-header:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.section-header .sh-count {
+  font-size: 10px;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.section-header.lease-header .sh-count { color: var(--blue); background: var(--blue-dim); border-color: var(--blue-border); }
+
+/* ── PROPERTY GRID ── */
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+/* ── PROPERTY CARD ── */
+.prop-card {
+  background: var(--slate);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.prop-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(200,160,67,0.35);
+  box-shadow: 0 14px 44px rgba(0,0,0,0.55);
+}
+.prop-card.lease-card:hover { border-color: rgba(74,140,200,0.35); }
+
+/* Card image */
+.card-img-wrap {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background: var(--mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.prop-card:hover .card-img-wrap img { transform: scale(1.04); }
+.card-img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.card-img-placeholder .ph-icon { font-size: 28px; opacity: 0.3; }
+.card-img-placeholder .ph-label { opacity: 0.4; }
+.card-photo-count {
+  position: absolute; bottom: 10px; right: 10px;
+  background: rgba(0,0,0,0.75); color: var(--white);
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  padding: 3px 8px; border-radius: 3px; letter-spacing: 0.5px;
+}
+.card-badge {
+  position: absolute; top: 10px; left: 10px;
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 3px; font-weight: 500;
+}
+.badge-opp { background: rgba(200,160,67,0.85); color: var(--black); }
+.badge-for-sale { background: rgba(63,168,112,0.85); color: var(--black); }
+.badge-for-lease { background: rgba(74,140,200,0.85); color: var(--black); }
+.badge-ai {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(8,12,16,0.85);
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 3px;
+}
+
+/* Card body */
+.card-body { padding: 16px; }
+.card-price {
+  font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+  color: var(--white); margin-bottom: 4px;
+}
+.card-price.lease { font-size: 16px; color: var(--blue); }
+.card-name { font-size: 11px; color: var(--gold); margin-bottom: 2px; font-weight: 600; letter-spacing: 0.3px; }
+.card-address { font-size: 12px; color: var(--text); margin-bottom: 12px; line-height: 1.4; }
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.tag {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 3px;
+  border: 1px solid var(--border); color: var(--text);
+}
+.tag.tag-land { border-color: rgba(200,160,67,0.2); color: var(--gold); background: var(--gold-dim); }
+.tag.tag-industrial { border-color: rgba(200,100,50,0.2); color: #c86432; background: rgba(200,100,50,0.08); }
+.tag.tag-office { border-color: rgba(100,160,200,0.2); color: #64a0c8; background: rgba(100,160,200,0.08); }
+.tag.tag-retail { border-color: rgba(160,100,200,0.2); color: #a064c8; background: rgba(160,100,200,0.08); }
+.card-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  padding-top: 14px; border-top: 1px solid var(--border);
+}
+.stat { text-align: center; }
+.stat-val { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--white); display: block; }
+.stat-lbl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.5px; color: var(--muted); text-transform: uppercase; display: block; margin-top: 2px; }
+
+/* Card footer */
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; border-top: 1px solid var(--border);
+  background: rgba(0,0,0,0.18);
+}
+.card-status { font-size: 11px; color: var(--muted); }
+.card-status strong { color: var(--text); font-weight: 500; }
+.btn-view {
+  font-family: 'Syne', sans-serif; font-size: 9px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  background: var(--gold-dim); color: var(--gold);
+  border: 1px solid var(--gold-border); padding: 5px 12px;
+  border-radius: 4px; cursor: pointer; transition: all 0.2s;
+}
+.btn-view:hover { background: var(--gold); color: var(--black); }
+.btn-view.lease { background: var(--blue-dim); color: var(--blue); border-color: var(--blue-border); }
+.btn-view.lease:hover { background: var(--blue); color: var(--black); }
+
+/* ── GALLERY PANEL ── */
+.gallery-overlay {
+  position: fixed; inset: 0; z-index: 800;
+  background: rgba(0,0,0,0.75);
+  display: none; align-items: stretch; justify-content: stretch;
+}
+.gallery-overlay.open { display: flex; }
+.gallery-panel {
+  width: 100vw; height: 100vh;
+  background: #090d11;
+  display: flex; flex-direction: column; overflow: hidden;
+  animation: panelIn 0.25s ease;
+}
+@keyframes panelIn { from { opacity: 0; transform: scale(0.99); } to { opacity: 1; transform: scale(1); } }
+
+.gp-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 36px; height: 62px;
+  background: #0c1015; border-bottom: 1px solid #1a2028;
+  flex-shrink: 0;
+}
+.gp-title-group { display: flex; flex-direction: column; gap: 3px; }
+.gp-address { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: #f0ece4; }
+.gp-meta { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 1px; }
+.gp-meta.lease { color: var(--blue); }
+.gp-topbar-right { display: flex; gap: 10px; align-items: center; }
+.gp-btn-close {
+  width: 36px; height: 36px; background: #1c2028; border: 1px solid #282f38;
+  color: #667; border-radius: 3px; font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+}
+.gp-btn-close:hover { color: #f0ece4; border-color: #445; }
+
+.gp-body {
+  flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #1a2028 transparent;
+}
+.gp-body::-webkit-scrollbar { width: 4px; }
+.gp-body::-webkit-scrollbar-thumb { background: #1a2028; }
+
+/* Hero image area */
+.gp-hero-wrap {
+  position: relative; width: 100%; height: 55vh;
+  background: #060a0d; overflow: hidden; flex-shrink: 0;
+}
+.gp-hero-img {
+  width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.25s;
+}
+.gp-hero-placeholder {
+  width: 100%; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+  color: #2a3040;
+}
+.gp-hero-placeholder .php-icon { font-size: 48px; opacity: 0.3; }
+.gp-hero-placeholder .php-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.3; }
+.gp-hero-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 60px 36px 22px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.86));
+  pointer-events: none;
+}
+.gp-hero-label { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #fff; letter-spacing: 0.5px; text-transform: uppercase; }
+.gp-hero-sublabel { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 1px; margin-top: 4px; }
+.gp-hero-counter {
+  position: absolute; top: 20px; right: 24px;
+  font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.4);
+  letter-spacing: 1px; background: rgba(0,0,0,0.5); padding: 4px 10px; border-radius: 2px;
+}
+.gp-hero-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(8,12,16,0.65); border: 1px solid rgba(255,255,255,0.08);
+  color: #fff; width: 48px; height: 80px; font-size: 26px; cursor: pointer;
+  border-radius: 3px; display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px); transition: background 0.15s;
+  line-height: 1;
+}
+.gp-hero-nav:hover { background: rgba(30,40,55,0.9); }
+.gp-hero-prev { left: 20px; }
+.gp-hero-next { right: 20px; }
+
+/* Renders grid */
+.gp-renders-header {
+  padding: 22px 36px 16px; border-top: 1px solid #151c24; background: #09100d;
+}
+.gp-renders-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; font-weight: 500; }
+.gp-renders-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: #2a3040; letter-spacing: 1px; margin-top: 4px; }
+.gp-render-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 3px; padding: 0 3px 3px; background: #000;
+}
+.gp-render-cell {
+  position: relative; aspect-ratio: 16/9; overflow: hidden;
+  cursor: pointer; background: #111820;
+}
+.gp-render-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s, opacity 0.2s; }
+.gp-render-cell:hover img { transform: scale(1.04); opacity: 0.85; }
+.gp-render-placeholder {
+  width: 100%; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px;
+  color: #1e2832; font-family: 'DM Mono', monospace; font-size: 8px;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.gp-render-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 24px 12px 9px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; color: #f0ece4;
+}
+
+/* Sidebar info */
+.gp-info-strip {
+  display: flex; gap: 0; padding: 20px 36px 24px;
+  background: #0c1015; border-top: 1px solid #151c24;
+  flex-wrap: wrap; gap: 20px;
+}
+.gp-info-block { display: flex; flex-direction: column; gap: 4px; }
+.gp-info-label { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+.gp-info-value { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); }
+.gp-info-value.gold { color: var(--gold); }
+.gp-info-value.blue { color: var(--blue); }
+
+.gp-disclaimer {
+  padding: 16px 36px 28px; font-family: 'DM Mono', monospace; font-size: 9px;
+  color: #1e2832; letter-spacing: 0.5px; line-height: 1.7;
+  border-top: 1px solid #10161c; background: #09100d;
+}
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.97);
+  display: none; align-items: center; justify-content: center; flex-direction: column;
+}
+.lightbox.open { display: flex; }
+.lb-img { max-width: 92vw; max-height: 90vh; object-fit: contain; border-radius: 2px; }
+.lb-cap { margin-top: 14px; font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; }
+.lb-close {
+  position: fixed; top: 22px; right: 26px;
+  background: #1c2028; border: 1px solid #333; color: #ccc;
+  width: 42px; height: 42px; border-radius: 3px; font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-nav {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(20,28,40,0.8); border: 1px solid rgba(255,255,255,0.08);
+  color: #fff; width: 52px; height: 80px; font-size: 28px; cursor: pointer;
+  border-radius: 3px; display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px); transition: background 0.15s;
+}
+.lb-nav:hover { background: rgba(40,55,75,0.95); }
+.lb-prev { left: 18px; }
+.lb-next { right: 18px; }
+
+/* ── FOOTER ── */
+.site-footer {
+  border-top: 1px solid var(--border); padding: 24px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1320px; margin: 0 auto;
+}
+.footer-brand { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+.footer-right { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); text-align: right; line-height: 1.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .property-grid { grid-template-columns: 1fr; }
+  .gp-render-grid { grid-template-columns: repeat(2, 1fr); }
+  .gp-info-strip { gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="brand">KAM <span>|</span> Commercial</div>
+  <div class="topbar-divider"></div>
+  <nav class="nav-tabs">
+    <button class="nav-tab active" onclick="filterTab('all')">All Properties</button>
+    <button class="nav-tab" onclick="filterTab('sale')">For Sale</button>
+    <button class="nav-tab" onclick="filterTab('lease')">For Lease</button>
+    <button class="nav-tab" onclick="filterTab('land')">Land</button>
+  </nav>
+  <div class="topbar-right">
+    <span class="topbar-city">Tucson, AZ</span>
+  </div>
+</div>
+
+<!-- HERO + FILTERS -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">KAM Commercial Real Estate · Tucson Portfolio</div>
+    <h1 class="hero-title">Tucson's Premier <em>Commercial</em> Properties</h1>
+    <p class="hero-sub">AI development renders · Opportunity Zones · Industrial, Office, Retail & Land across Tucson metro</p>
+    <div class="filter-bar">
+      <select class="filter-select" id="typeFilter" onchange="applyFilters()">
+        <option value="">All Types</option>
+        <option value="Land">Land</option>
+        <option value="Industrial">Industrial</option>
+        <option value="Office">Office</option>
+        <option value="Retail">Retail</option>
+      </select>
+      <select class="filter-select" id="statusFilter" onchange="applyFilters()">
+        <option value="">For Sale &amp; Lease</option>
+        <option value="sale">For Sale Only</option>
+        <option value="lease">For Lease Only</option>
+      </select>
+      <div class="filter-chip active" id="chip-opp" onclick="toggleChip('opp')">Opportunity Zone ✦</div>
+      <div class="filter-chip active" id="chip-land" onclick="toggleChip('land')">Land Available</div>
+      <div class="filter-chip active lease-chip" id="chip-ai" onclick="toggleChip('ai')">AI Renders Ready</div>
+      <div class="results-count" id="results-count">39 properties</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+  <div class="view-controls">
+    <span class="view-label" id="view-label">Showing 39 KAM Commercial properties · Tucson, AZ</span>
+  </div>
+
+  <!-- ═══ FOR SALE ═══ -->
+  <div class="section-header" id="sale-header">
+    FOR SALE <span class="sh-count">12 listings</span>
+  </div>
+  <div class="property-grid" id="sale-grid">
+
+    <!-- SALE-01: 7800 E Benson Hwy -->
+    <div class="prop-card" data-type="Land" data-status="sale" data-opp="false" onclick="openGallery('sale-01')">
+      <div class="card-img-wrap" id="card-img-sale-01">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-sale">For Sale</div>
+      <div class="card-body">
+        <div class="card-price">$1,320,000</div>
+        <div class="card-address">7800 E Benson Highway<br>Tucson, AZ 85756</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">5.5 Acres</span>
+          <span class="tag">I-10 Corridor</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">5.5</span><span class="stat-lbl">Acres</span></div>
+          <div class="stat"><span class="stat-val">85756</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Land</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-02: 5500 Block I-10 Frontage -->
+    <div class="prop-card" data-type="Land" data-status="sale" data-opp="false" onclick="openGallery('sale-02')">
+      <div class="card-img-wrap" id="card-img-sale-02">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-sale">For Sale</div>
+      <div class="card-body">
+        <div class="card-price">$1,990,857</div>
+        <div class="card-address">5500 Block E I-10 Frontage Rd<br>I-10 & Valencia Rd · Tucson, AZ 85756</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">8.31 Acres</span>
+          <span class="tag">Lots 1–11</span>
+          <span class="tag">Divisible</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">8.31</span><span class="stat-lbl">Acres</span></div>
+          <div class="stat"><span class="stat-val">11</span><span class="stat-lbl">Lots</span></div>
+          <div class="stat"><span class="stat-val">I-10</span><span class="stat-lbl">Frontage</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-03: 1500-1520 E Benson Hwy (Industrial) -->
+    <div class="prop-card" data-type="Industrial" data-status="sale" data-opp="true" onclick="openGallery('sale-03')">
+      <div class="card-img-wrap" id="card-img-sale-03">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-opp">Opportunity Zone</div>
+      <div class="card-body">
+        <div class="card-price">$1,950,000</div>
+        <div class="card-address">1500–1520 E Benson Highway<br>Tucson, AZ 85714</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">14,752 SqFt</span>
+          <span class="tag">Opp Zone</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">14,752</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85714</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-04: 3410 N First Ave (Retail) -->
+    <div class="prop-card" data-type="Retail" data-status="sale" data-opp="false" onclick="openGallery('sale-04')">
+      <div class="card-img-wrap" id="card-img-sale-04">
+        <div class="card-img-placeholder"><div class="ph-icon">🏪</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-sale">For Sale</div>
+      <div class="card-body">
+        <div class="card-price">$475,000</div>
+        <div class="card-address">3410 N First Ave<br>Tucson, AZ 85719</div>
+        <div class="card-tags">
+          <span class="tag tag-retail">Retail</span>
+          <span class="tag">4,620 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">4,620</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85719</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Retail</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-05: 5050 & 5056 E Speedway (Land) -->
+    <div class="prop-card" data-type="Land" data-status="sale" data-opp="false" onclick="openGallery('sale-05')">
+      <div class="card-img-wrap" id="card-img-sale-05">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-sale">For Sale</div>
+      <div class="card-body">
+        <div class="card-price">$975,000</div>
+        <div class="card-address">5050 & 5056 E. Speedway Blvd.<br>Tucson, AZ 85712</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">0.69 Acres</span>
+          <span class="tag">Speedway Corridor</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">0.69</span><span class="stat-lbl">Acres</span></div>
+          <div class="stat"><span class="stat-val">85712</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Land</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-06: 1702 W Anklam (Office) -->
+    <div class="prop-card" data-type="Office" data-status="sale" data-opp="false" onclick="openGallery('sale-06')">
+      <div class="card-img-wrap" id="card-img-sale-06">
+        <div class="card-img-placeholder"><div class="ph-icon">🏢</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-sale">For Sale</div>
+      <div class="card-body">
+        <div class="card-price">Unpriced</div>
+        <div class="card-address">1702 W. Anklam Rd., Suite 111<br>Tucson, AZ 85745</div>
+        <div class="card-tags">
+          <span class="tag tag-office">Office</span>
+          <span class="tag">1,192 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">1,192</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85745</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Office</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-07: 4915 E Speedway (Land) -->
+    <div class="prop-card" data-type="Land" data-status="sale" data-opp="false" onclick="openGallery('sale-07')">
+      <div class="card-img-wrap" id="card-img-sale-07">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-sale">For Sale</div>
+      <div class="card-body">
+        <div class="card-price">Unpriced</div>
+        <div class="card-address">4915 E. Speedway Blvd.<br>Tucson, AZ 85712</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">1.59 Acres</span>
+          <span class="tag">Speedway Corridor</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">1.59</span><span class="stat-lbl">Acres</span></div>
+          <div class="stat"><span class="stat-val">85712</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Land</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-08: 3001 S Cottonwood (Land) -->
+    <div class="prop-card" data-type="Land" data-status="sale" data-opp="false" onclick="openGallery('sale-08')">
+      <div class="card-img-wrap" id="card-img-sale-08">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-sale">For Sale</div>
+      <div class="card-body">
+        <div class="card-price">$1,299,999</div>
+        <div class="card-address">3001 S. Cottonwood Lane<br>Tucson, AZ 85713</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">10.28 Acres</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">10.28</span><span class="stat-lbl">Acres</span></div>
+          <div class="stat"><span class="stat-val">85713</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Land</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-09: 3380 E Michigan (Land) -->
+    <div class="prop-card" data-type="Land" data-status="sale" data-opp="false" onclick="openGallery('sale-09')">
+      <div class="card-img-wrap" id="card-img-sale-09">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-sale">For Sale</div>
+      <div class="card-body">
+        <div class="card-price">$2,500,000</div>
+        <div class="card-address">3380 E. Michigan St.<br>Tucson, AZ 85714</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">4.17 Acres</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">4.17</span><span class="stat-lbl">Acres</span></div>
+          <div class="stat"><span class="stat-val">85714</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Land</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-10: 275 W Adams (Land OZ) -->
+    <div class="prop-card" data-type="Land" data-status="sale" data-opp="true" onclick="openGallery('sale-10')">
+      <div class="card-img-wrap" id="card-img-sale-10">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-opp">Opportunity Zone</div>
+      <div class="card-body">
+        <div class="card-price">$175,000</div>
+        <div class="card-address">275 W. Adams St.<br>Tucson, AZ 85705</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">0.164 Acres</span>
+          <span class="tag">Opp Zone</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">0.164</span><span class="stat-lbl">Acres</span></div>
+          <div class="stat"><span class="stat-val">85705</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Land</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-11: 3838 E Fort Lowell (Office) -->
+    <div class="prop-card" data-type="Office" data-status="sale" data-opp="false" onclick="openGallery('sale-11')">
+      <div class="card-img-wrap" id="card-img-sale-11">
+        <div class="card-img-placeholder"><div class="ph-icon">🏢</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-sale">For Sale</div>
+      <div class="card-body">
+        <div class="card-price">$699,000</div>
+        <div class="card-address">3838 E. Fort Lowell Rd.<br>Tucson, AZ 85716</div>
+        <div class="card-tags">
+          <span class="tag tag-office">Office</span>
+          <span class="tag">3,663 SqFt</span>
+          <span class="tag">7.60% CAP</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">3,663</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">7.60%</span><span class="stat-lbl">CAP Rate</span></div>
+          <div class="stat"><span class="stat-val">Office</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+    <!-- SALE-12: 244 W Drachman (Office OZ) -->
+    <div class="prop-card" data-type="Office" data-status="sale" data-opp="true" onclick="openGallery('sale-12')">
+      <div class="card-img-wrap" id="card-img-sale-12">
+        <div class="card-img-placeholder"><div class="ph-icon">🏢</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-opp">Opportunity Zone</div>
+      <div class="card-body">
+        <div class="card-price">$595,000</div>
+        <div class="card-address">244 W. Drachman St.<br>Tucson, AZ 85705</div>
+        <div class="card-tags">
+          <span class="tag tag-office">Office</span>
+          <span class="tag">4,065 SqFt</span>
+          <span class="tag">Opp Zone</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">4,065</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85705</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Office</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view">View Renders</button>
+      </div>
+    </div>
+
+  </div><!-- /sale-grid -->
+
+  <!-- ═══ FOR LEASE ═══ -->
+  <div class="section-header lease-header" id="lease-header">
+    FOR LEASE <span class="sh-count">27 listings</span>
+  </div>
+  <div class="property-grid" id="lease-grid">
+
+    <!-- LEASE-01: Ajo/Evans Business Park -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-01')">
+      <div class="card-img-wrap" id="card-img-lease-01">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-name">Ajo/Evans Business Park</div>
+        <div class="card-price lease">$1.20/SF/MO</div>
+        <div class="card-address">1100 & 1200 E. Ajo Way, 3819 & 3855 S. Evans Blvd.<br>Tucson, AZ 85713</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">4 Spaces</span>
+          <span class="tag">860–1,802 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">4</span><span class="stat-lbl">Spaces</span></div>
+          <div class="stat"><span class="stat-val">1,802</span><span class="stat-lbl">Max SqFt</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-02: 6898-6910 N Camino Martin -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-02')">
+      <div class="card-img-wrap" id="card-img-lease-02">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">$1.15–$1.20/SF/MO</div>
+        <div class="card-address">6898–6910 N Camino Martin<br>Tucson, AZ 85741</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">6 Spaces</span>
+          <span class="tag">1,172–2,925 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">6</span><span class="stat-lbl">Spaces</span></div>
+          <div class="stat"><span class="stat-val">2,925</span><span class="stat-lbl">Max SqFt</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-03: Tucson Tech Park -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-03')">
+      <div class="card-img-wrap" id="card-img-lease-03">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-name">Tucson Tech Park</div>
+        <div class="card-price lease">$1.20/SF/MO</div>
+        <div class="card-address">1660–1700 E. Winsett / 18th / 17th St.<br>Tucson, AZ 85719</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">8 Spaces</span>
+          <span class="tag">1,220–3,367 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">8</span><span class="stat-lbl">Spaces</span></div>
+          <div class="stat"><span class="stat-val">3,367</span><span class="stat-lbl">Max SqFt</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-04: 3690-3700 S Palo Verde -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-04')">
+      <div class="card-img-wrap" id="card-img-lease-04">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">$0.95/SF/MO</div>
+        <div class="card-address">3690–3700 S. Palo Verde Road<br>Tucson, AZ 85713</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">9,438–27,208 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">27,208</span><span class="stat-lbl">Max SqFt</span></div>
+          <div class="stat"><span class="stat-val">85713</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-05: 3450 S Broadmont -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-05')">
+      <div class="card-img-wrap" id="card-img-lease-05">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">$0.80/SF/MO</div>
+        <div class="card-address">3450 S Broadmont Dr<br>Tucson, AZ 85713</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">5,150 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">5,150</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85713</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-06: 3778 E 43rd Place -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-06')">
+      <div class="card-img-wrap" id="card-img-lease-06">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">$1.40/SF/MO</div>
+        <div class="card-address">3778 E. 43rd Place<br>Tucson, AZ 85713</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">6,525 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">6,525</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85713</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-07: Old Vail Commerce Center -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-07')">
+      <div class="card-img-wrap" id="card-img-lease-07">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-name">Old Vail Commerce Center</div>
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">8374 E. Old Vail Rd.<br>Tucson, AZ 85747</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">8 Spaces</span>
+          <span class="tag">55,800–464,500 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">8</span><span class="stat-lbl">Spaces</span></div>
+          <div class="stat"><span class="stat-val">464,500</span><span class="stat-lbl">Max SqFt</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-08: Park/Ajo Commerce Center -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-08')">
+      <div class="card-img-wrap" id="card-img-lease-08">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-name">Park/Ajo Commerce Center</div>
+        <div class="card-price lease">$0.72/SF/MO</div>
+        <div class="card-address">3770 S. Park Avenue<br>Tucson, AZ 85713</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">10,000 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">10,000</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85713</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-09: 1500-1520 E Benson (lease) -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-09')">
+      <div class="card-img-wrap" id="card-img-lease-09">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">$0.90–$0.95/SF/MO</div>
+        <div class="card-address">1500–1520 E Benson Highway<br>Tucson, AZ 85714</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">2 Spaces</span>
+          <span class="tag">6,625–14,752 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">2</span><span class="stat-lbl">Spaces</span></div>
+          <div class="stat"><span class="stat-val">14,752</span><span class="stat-lbl">Max SqFt</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-10: 2840 N Country Club (Office) -->
+    <div class="prop-card lease-card" data-type="Office" data-status="lease" data-opp="false" onclick="openGallery('lease-10')">
+      <div class="card-img-wrap" id="card-img-lease-10">
+        <div class="card-img-placeholder"><div class="ph-icon">🏢</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">$18/SF/YR</div>
+        <div class="card-address">2840 N. Country Club Rd.<br>Tucson, AZ 85716</div>
+        <div class="card-tags">
+          <span class="tag tag-office">Office</span>
+          <span class="tag">1,056 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">1,056</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85716</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Office</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-11: 3441 E Michigan -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-11')">
+      <div class="card-img-wrap" id="card-img-lease-11">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">3441 E. Michigan St.<br>Tucson, AZ 85714</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">5,000 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">5,000</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85714</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-12: 3763 E 43rd Place -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-12')">
+      <div class="card-img-wrap" id="card-img-lease-12">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">3763 E 43rd Place<br>Tucson, AZ 85713</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">—</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85713</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-13: 4420 E Speedway (Office) -->
+    <div class="prop-card lease-card" data-type="Office" data-status="lease" data-opp="false" onclick="openGallery('lease-13')">
+      <div class="card-img-wrap" id="card-img-lease-13">
+        <div class="card-img-placeholder"><div class="ph-icon">🏢</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">$15/SF/YR</div>
+        <div class="card-address">4420 E. Speedway<br>Tucson, AZ 85712</div>
+        <div class="card-tags">
+          <span class="tag tag-office">Office</span>
+          <span class="tag">1,306 SqFt</span>
+          <span class="tag">Speedway Corridor</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">1,306</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85712</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Office</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-14: Lisa Frank Warehouse -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-14')">
+      <div class="card-img-wrap" id="card-img-lease-14">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-name">Lisa Frank Warehouse</div>
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">6760 S. Lisa Frank Avenue<br>Tucson, AZ 85756</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">20,000–250,000 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">250,000</span><span class="stat-lbl">Max SqFt</span></div>
+          <div class="stat"><span class="stat-val">85756</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-15: Sherwood Professional Terrace -->
+    <div class="prop-card lease-card" data-type="Office" data-status="lease" data-opp="false" onclick="openGallery('lease-15')">
+      <div class="card-img-wrap" id="card-img-lease-15">
+        <div class="card-img-placeholder"><div class="ph-icon">🏢</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-name">Sherwood Professional Terrace</div>
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">8230 E Broadway Blvd, Suite W-6<br>Tucson, AZ 85710</div>
+        <div class="card-tags">
+          <span class="tag tag-office">Office</span>
+          <span class="tag">564 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">564</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85710</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Office</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-16: 2080 E Beverly Dr -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-16')">
+      <div class="card-img-wrap" id="card-img-lease-16">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">$0.90/SF/MO</div>
+        <div class="card-address">2080 E Beverly Dr<br>Tucson, AZ 85719</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">8,858 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">8,858</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85719</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-17: The Marquez Professional Campus -->
+    <div class="prop-card lease-card" data-type="Office" data-status="lease" data-opp="false" onclick="openGallery('lease-17')">
+      <div class="card-img-wrap" id="card-img-lease-17">
+        <div class="card-img-placeholder"><div class="ph-icon">🏢</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-name">The Marquez Professional Campus</div>
+        <div class="card-price lease">$1.83–$7.65/SF/MO</div>
+        <div class="card-address">2713–2719 N. Campbell Avenue<br>Tucson, AZ 85719</div>
+        <div class="card-tags">
+          <span class="tag tag-office">Office</span>
+          <span class="tag">4 Spaces</span>
+          <span class="tag">85–1,300 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">4</span><span class="stat-lbl">Spaces</span></div>
+          <div class="stat"><span class="stat-val">1,300</span><span class="stat-lbl">Max SqFt</span></div>
+          <div class="stat"><span class="stat-val">Office</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-18: 2200 E Benson Hwy -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-18')">
+      <div class="card-img-wrap" id="card-img-lease-18">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">2200 E Benson Highway<br>Tucson, AZ 85714</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">5,760 SqFt</span>
+          <span class="tag">Single Tenant</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">5,760</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85714</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-19: 56 W Congress St (Office) -->
+    <div class="prop-card lease-card" data-type="Office" data-status="lease" data-opp="false" onclick="openGallery('lease-19')">
+      <div class="card-img-wrap" id="card-img-lease-19">
+        <div class="card-img-placeholder"><div class="ph-icon">🏢</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">$20.25/SF/YR</div>
+        <div class="card-address">56 W. Congress Street<br>Tucson, AZ 85701</div>
+        <div class="card-tags">
+          <span class="tag tag-office">Office</span>
+          <span class="tag">2,500–11,552 SqFt</span>
+          <span class="tag">Downtown</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">11,552</span><span class="stat-lbl">Max SqFt</span></div>
+          <div class="stat"><span class="stat-val">85701</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Office</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-20: 1636 N 15th Ave (Land) -->
+    <div class="prop-card lease-card" data-type="Land" data-status="lease" data-opp="false" onclick="openGallery('lease-20')">
+      <div class="card-img-wrap" id="card-img-lease-20">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">1636 N. 15th Ave.<br>Tucson, AZ 85705</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">143,312 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">143,312</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85705</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Land</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-21: Central City Business Park -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-21')">
+      <div class="card-img-wrap" id="card-img-lease-21">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-name">Central City Business Park</div>
+        <div class="card-price lease">$0.95/SF/MO</div>
+        <div class="card-address">325 S. Euclid Avenue<br>Tucson, AZ 85719</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">4,615 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">4,615</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85719</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-22: I-10 & Valencia (Land Lease) -->
+    <div class="prop-card lease-card" data-type="Land" data-status="lease" data-opp="false" onclick="openGallery('lease-22')">
+      <div class="card-img-wrap" id="card-img-lease-22">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-name">8.31± Acres Commercial Land</div>
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">5500 Block E I-10 Frontage Rd<br>I-10 & Valencia · Tucson, AZ 85756</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">8 Acres</span>
+          <span class="tag">Divisible</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">8</span><span class="stat-lbl">Acres</span></div>
+          <div class="stat"><span class="stat-val">85756</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Land</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-23: 5050 Speedway (Land lease) -->
+    <div class="prop-card lease-card" data-type="Land" data-status="lease" data-opp="false" onclick="openGallery('lease-23')">
+      <div class="card-img-wrap" id="card-img-lease-23">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">5050 & 5056 E. Speedway Blvd.<br>Tucson, AZ 85712</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">30,056 SqFt</span>
+          <span class="tag">Speedway Corridor</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">30,056</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85712</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Land</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-24: 244 W Drachman (Office lease) -->
+    <div class="prop-card lease-card" data-type="Office" data-status="lease" data-opp="true" onclick="openGallery('lease-24')">
+      <div class="card-img-wrap" id="card-img-lease-24">
+        <div class="card-img-placeholder"><div class="ph-icon">🏢</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-opp">Opportunity Zone</div>
+      <div class="card-body">
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">244 W Drachman St<br>Tucson, AZ 85705</div>
+        <div class="card-tags">
+          <span class="tag tag-office">Office</span>
+          <span class="tag">4,065 SqFt</span>
+          <span class="tag">Opp Zone</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">4,065</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85705</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Office</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-25: 4915 E Speedway (Land lease) -->
+    <div class="prop-card lease-card" data-type="Land" data-status="lease" data-opp="false" onclick="openGallery('lease-25')">
+      <div class="card-img-wrap" id="card-img-lease-25">
+        <div class="card-img-placeholder"><div class="ph-icon">📍</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">4915 E. Speedway Blvd.<br>Tucson, AZ 85712</div>
+        <div class="card-tags">
+          <span class="tag tag-land">Land</span>
+          <span class="tag">69,260 SqFt</span>
+          <span class="tag">Speedway Corridor</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">69,260</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85712</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Land</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-26: 149 W Sahuaro St -->
+    <div class="prop-card lease-card" data-type="Industrial" data-status="lease" data-opp="false" onclick="openGallery('lease-26')">
+      <div class="card-img-wrap" id="card-img-lease-26">
+        <div class="card-img-placeholder"><div class="ph-icon">🏭</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">$1.15/SF/MO</div>
+        <div class="card-address">149 W Sahuaro St<br>Tucson, AZ 85705</div>
+        <div class="card-tags">
+          <span class="tag tag-industrial">Industrial</span>
+          <span class="tag">5,100 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">5,100</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85705</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Indust.</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+    <!-- LEASE-27: 340 N Commerce Park Loop (Office) -->
+    <div class="prop-card lease-card" data-type="Office" data-status="lease" data-opp="false" onclick="openGallery('lease-27')">
+      <div class="card-img-wrap" id="card-img-lease-27">
+        <div class="card-img-placeholder"><div class="ph-icon">🏢</div><div class="ph-label">AI Render Ready</div></div>
+      </div>
+      <div class="card-badge badge-for-lease">For Lease</div>
+      <div class="card-body">
+        <div class="card-price lease">Rate Undisclosed</div>
+        <div class="card-address">340 N Commerce Park Loop<br>Tucson, AZ 85745</div>
+        <div class="card-tags">
+          <span class="tag tag-office">Office</span>
+          <span class="tag">9,800 SqFt</span>
+        </div>
+        <div class="card-stats">
+          <div class="stat"><span class="stat-val">9,800</span><span class="stat-lbl">SqFt</span></div>
+          <div class="stat"><span class="stat-val">85745</span><span class="stat-lbl">ZIP</span></div>
+          <div class="stat"><span class="stat-val">Office</span><span class="stat-lbl">Type</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-status">KAM Commercial</div>
+        <button class="btn-view lease">View Renders</button>
+      </div>
+    </div>
+
+  </div><!-- /lease-grid -->
+</div><!-- /main -->
+
+<!-- GALLERY PANEL -->
+<div class="gallery-overlay" id="gallery-overlay" onclick="closeGallery(event)">
+  <div class="gallery-panel" id="gallery-panel">
+    <div class="gp-topbar">
+      <div class="gp-title-group">
+        <div class="gp-address" id="gp-address">Property</div>
+        <div class="gp-meta" id="gp-meta">KAM Commercial</div>
+      </div>
+      <div class="gp-topbar-right">
+        <button class="gp-btn-close" onclick="closeGalleryBtn()">✕</button>
+      </div>
+    </div>
+    <div class="gp-body" id="gp-body">
+      <div class="gp-hero-wrap">
+        <div class="gp-hero-placeholder" id="gp-hero-placeholder">
+          <div class="php-icon">🏙️</div>
+          <div class="php-label">Upload images to fill this slot</div>
+        </div>
+        <img class="gp-hero-img" id="gp-hero-img" src="" alt="" style="display:none" onclick="openLightbox(currentHeroIdx)">
+        <div class="gp-hero-overlay" id="gp-hero-overlay" style="display:none">
+          <div class="gp-hero-label" id="gp-hero-label">—</div>
+          <div class="gp-hero-sublabel" id="gp-hero-sublabel">Original photo</div>
+        </div>
+        <div class="gp-hero-counter" id="gp-hero-counter" style="display:none">1 / 1</div>
+        <button class="gp-hero-nav gp-hero-prev" id="gp-hero-prev" onclick="heroNav(-1)" style="display:none">‹</button>
+        <button class="gp-hero-nav gp-hero-next" id="gp-hero-next" onclick="heroNav(1)" style="display:none">›</button>
+      </div>
+
+      <div class="gp-renders-header">
+        <div class="gp-renders-title">AI Development Renders</div>
+        <div class="gp-renders-sub" id="gp-renders-sub">Renders will appear here as images are added</div>
+      </div>
+      <div class="gp-render-grid" id="gp-render-grid">
+        <!-- populated by JS -->
+      </div>
+
+      <div class="gp-info-strip" id="gp-info-strip">
+        <!-- populated by JS -->
+      </div>
+
+      <div class="gp-disclaimer">
+        KAM COMMERCIAL REAL ESTATE · All information deemed reliable but not guaranteed. AI renders are conceptual representations only and do not constitute a representation of the property as-built. Contact KAM Commercial for current availability and pricing. © 2025 KAM Commercial.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <img class="lb-img" id="lb-img" src="" alt="">
+  <div class="lb-cap" id="lb-cap"></div>
+  <button class="lb-nav lb-prev" onclick="lbNav(-1)">‹</button>
+  <button class="lb-nav lb-next" onclick="lbNav(1)">›</button>
+</div>
+
+<!-- FOOTER -->
+<div class="site-footer">
+  <div class="footer-brand">KAM Commercial</div>
+  <div class="footer-right">Tucson, Arizona · Commercial Real Estate<br>All properties subject to availability</div>
+</div>
+
+<script>
+// ── PROPERTY DATA ──
+const PROPERTIES = {
+  'sale-01': { addr: '7800 E Benson Highway', city: 'Tucson, AZ 85756', price: '$1,320,000', type: 'Land · 5.5 Acres', status: 'For Sale', isLease: false, images: [] },
+  'sale-02': { addr: '5500 Block E I-10 Frontage Rd', city: 'I-10 & Valencia Rd · Tucson, AZ 85756', price: '$1,990,857', type: 'Land · 8.31 Acres', status: 'For Sale', isLease: false, images: [] },
+  'sale-03': { addr: '1500–1520 E Benson Highway', city: 'Tucson, AZ 85714', price: '$1,950,000', type: 'Industrial · 14,752 SqFt', status: 'For Sale · Opportunity Zone', isLease: false, images: [] },
+  'sale-04': { addr: '3410 N First Ave', city: 'Tucson, AZ 85719', price: '$475,000', type: 'Retail · 4,620 SqFt', status: 'For Sale', isLease: false, images: [] },
+  'sale-05': { addr: '5050 & 5056 E. Speedway Blvd.', city: 'Tucson, AZ 85712', price: '$975,000', type: 'Land · 0.69 Acres', status: 'For Sale', isLease: false, images: [] },
+  'sale-06': { addr: '1702 W. Anklam Rd., Suite 111', city: 'Tucson, AZ 85745', price: 'Unpriced', type: 'Office · 1,192 SqFt', status: 'For Sale', isLease: false, images: [] },
+  'sale-07': { addr: '4915 E. Speedway Blvd.', city: 'Tucson, AZ 85712', price: 'Unpriced', type: 'Land · 1.59 Acres', status: 'For Sale', isLease: false, images: [] },
+  'sale-08': { addr: '3001 S. Cottonwood Lane', city: 'Tucson, AZ 85713', price: '$1,299,999', type: 'Land · 10.28 Acres', status: 'For Sale', isLease: false, images: [] },
+  'sale-09': { addr: '3380 E. Michigan St.', city: 'Tucson, AZ 85714', price: '$2,500,000', type: 'Land · 4.17 Acres', status: 'For Sale', isLease: false, images: [] },
+  'sale-10': { addr: '275 W. Adams St.', city: 'Tucson, AZ 85705', price: '$175,000', type: 'Land · 0.164 Acres', status: 'For Sale · Opportunity Zone', isLease: false, images: [] },
+  'sale-11': { addr: '3838 E. Fort Lowell Rd.', city: 'Tucson, AZ 85716', price: '$699,000', type: 'Office · 3,663 SqFt · 7.60% CAP', status: 'For Sale', isLease: false, images: [] },
+  'sale-12': { addr: '244 W. Drachman St.', city: 'Tucson, AZ 85705', price: '$595,000', type: 'Office · 4,065 SqFt', status: 'For Sale · Opportunity Zone', isLease: false, images: [] },
+  'lease-01': { addr: 'Ajo/Evans Business Park', city: '1100 & 1200 E. Ajo Way · Tucson, AZ 85713', price: '$1.20/SF/MO', type: 'Industrial · 4 Spaces · 860–1,802 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-02': { addr: '6898–6910 N Camino Martin', city: 'Tucson, AZ 85741', price: '$1.15–$1.20/SF/MO', type: 'Industrial · 6 Spaces · 1,172–2,925 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-03': { addr: 'Tucson Tech Park', city: '1660–1700 E. Winsett / 18th / 17th St. · Tucson, AZ 85719', price: '$1.20/SF/MO', type: 'Industrial · 8 Spaces · 1,220–3,367 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-04': { addr: '3690–3700 S. Palo Verde Road', city: 'Tucson, AZ 85713', price: '$0.95/SF/MO', type: 'Industrial · 9,438–27,208 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-05': { addr: '3450 S Broadmont Dr', city: 'Tucson, AZ 85713', price: '$0.80/SF/MO', type: 'Industrial · 5,150 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-06': { addr: '3778 E. 43rd Place', city: 'Tucson, AZ 85713', price: '$1.40/SF/MO', type: 'Industrial · 6,525 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-07': { addr: 'Old Vail Commerce Center', city: '8374 E. Old Vail Rd. · Tucson, AZ 85747', price: 'Rate Undisclosed', type: 'Industrial · 8 Spaces · 55,800–464,500 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-08': { addr: 'Park/Ajo Commerce Center', city: '3770 S. Park Avenue · Tucson, AZ 85713', price: '$0.72/SF/MO', type: 'Industrial · 10,000 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-09': { addr: '1500–1520 E Benson Highway', city: 'Tucson, AZ 85714', price: '$0.90–$0.95/SF/MO', type: 'Industrial · 2 Spaces · 6,625–14,752 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-10': { addr: '2840 N. Country Club Rd.', city: 'Tucson, AZ 85716', price: '$18/SF/YR', type: 'Office · 1,056 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-11': { addr: '3441 E. Michigan St.', city: 'Tucson, AZ 85714', price: 'Rate Undisclosed', type: 'Industrial · 5,000 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-12': { addr: '3763 E 43rd Place', city: 'Tucson, AZ 85713', price: 'Rate Undisclosed', type: 'Industrial', status: 'For Lease', isLease: true, images: [] },
+  'lease-13': { addr: '4420 E. Speedway', city: 'Tucson, AZ 85712', price: '$15/SF/YR', type: 'Office · 1,306 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-14': { addr: 'Lisa Frank Warehouse', city: '6760 S. Lisa Frank Avenue · Tucson, AZ 85756', price: 'Rate Undisclosed', type: 'Industrial · 20,000–250,000 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-15': { addr: 'Sherwood Professional Terrace', city: '8230 E Broadway Blvd, Suite W-6 · Tucson, AZ 85710', price: 'Rate Undisclosed', type: 'Office · 564 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-16': { addr: '2080 E Beverly Dr', city: 'Tucson, AZ 85719', price: '$0.90/SF/MO', type: 'Industrial · 8,858 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-17': { addr: 'The Marquez Professional Campus', city: '2713–2719 N. Campbell Avenue · Tucson, AZ 85719', price: '$1.83–$7.65/SF/MO', type: 'Office · 4 Spaces · 85–1,300 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-18': { addr: '2200 E Benson Highway', city: 'Tucson, AZ 85714', price: 'Rate Undisclosed', type: 'Industrial · 5,760 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-19': { addr: '56 W. Congress Street', city: 'Tucson, AZ 85701', price: '$20.25/SF/YR', type: 'Office · 2,500–11,552 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-20': { addr: '1636 N. 15th Ave.', city: 'Tucson, AZ 85705', price: 'Rate Undisclosed', type: 'Land · 143,312 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-21': { addr: 'Central City Business Park', city: '325 S. Euclid Avenue · Tucson, AZ 85719', price: '$0.95/SF/MO', type: 'Industrial · 4,615 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-22': { addr: '8.31± Acres Commercial Land', city: '5500 Block E I-10 Frontage Rd · Tucson, AZ 85756', price: 'Rate Undisclosed', type: 'Land · 8 Acres · Divisible', status: 'For Lease', isLease: true, images: [] },
+  'lease-23': { addr: '5050 & 5056 E. Speedway Blvd.', city: 'Tucson, AZ 85712', price: 'Rate Undisclosed', type: 'Land · 30,056 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-24': { addr: '244 W Drachman St', city: 'Tucson, AZ 85705', price: 'Rate Undisclosed', type: 'Office · 4,065 SqFt', status: 'For Lease · Opportunity Zone', isLease: true, images: [] },
+  'lease-25': { addr: '4915 E. Speedway Blvd.', city: 'Tucson, AZ 85712', price: 'Rate Undisclosed', type: 'Land · 69,260 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-26': { addr: '149 W Sahuaro St', city: 'Tucson, AZ 85705', price: '$1.15/SF/MO', type: 'Industrial · 5,100 SqFt', status: 'For Lease', isLease: true, images: [] },
+  'lease-27': { addr: '340 N Commerce Park Loop', city: 'Tucson, AZ 85745', price: 'Rate Undisclosed', type: 'Office · 9,800 SqFt', status: 'For Lease', isLease: true, images: [] },
+};
+
+// ── GALLERY STATE ──
+let currentPropId = null;
+let currentHeroIdx = 0;
+let lbImages = [];
+let lbIdx = 0;
+
+function openGallery(propId) {
+  currentPropId = propId;
+  currentHeroIdx = 0;
+  const p = PROPERTIES[propId];
+  document.getElementById('gp-address').textContent = p.addr;
+  const metaEl = document.getElementById('gp-meta');
+  metaEl.textContent = p.price + ' · ' + p.status;
+  metaEl.className = 'gp-meta' + (p.isLease ? ' lease' : '');
+
+  // Build hero
+  const imgs = p.images;
+  const heroImg = document.getElementById('gp-hero-img');
+  const heroPlaceholder = document.getElementById('gp-hero-placeholder');
+  const heroOverlay = document.getElementById('gp-hero-overlay');
+  const heroCounter = document.getElementById('gp-hero-counter');
+  const heroPrev = document.getElementById('gp-hero-prev');
+  const heroNext = document.getElementById('gp-hero-next');
+
+  if (imgs.length > 0) {
+    heroImg.src = imgs[0].src;
+    heroImg.style.display = 'block';
+    heroPlaceholder.style.display = 'none';
+    heroOverlay.style.display = 'block';
+    document.getElementById('gp-hero-label').textContent = imgs[0].label || p.addr.toUpperCase();
+    document.getElementById('gp-hero-sublabel').textContent = imgs[0].sublabel || 'Property photo';
+    if (imgs.length > 1) {
+      heroCounter.style.display = 'block';
+      heroCounter.textContent = '1 / ' + imgs.length;
+      heroPrev.style.display = 'flex';
+      heroNext.style.display = 'flex';
+    } else {
+      heroCounter.style.display = 'none';
+      heroPrev.style.display = 'none';
+      heroNext.style.display = 'none';
+    }
+  } else {
+    heroImg.style.display = 'none';
+    heroPlaceholder.style.display = 'flex';
+    heroOverlay.style.display = 'none';
+    heroCounter.style.display = 'none';
+    heroPrev.style.display = 'none';
+    heroNext.style.display = 'none';
+  }
+
+  // Build renders grid (images beyond the first slot, or all as renders)
+  const renderGrid = document.getElementById('gp-render-grid');
+  renderGrid.innerHTML = '';
+  const renders = imgs.length > 1 ? imgs.slice(1) : [];
+  const RENDER_SLOTS = 9;
+  document.getElementById('gp-renders-sub').textContent = 
+    renders.length > 0 ? renders.length + ' AI render(s) available' : 'Renders will appear here as images are added';
+
+  for (let i = 0; i < RENDER_SLOTS; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'gp-render-cell';
+    if (renders[i]) {
+      const img = document.createElement('img');
+      img.src = renders[i].src;
+      img.alt = renders[i].label || 'AI Render ' + (i+1);
+      const lbl = document.createElement('div');
+      lbl.className = 'gp-render-label';
+      lbl.textContent = renders[i].label || 'AI Render ' + (i+1);
+      const idx = i + 1; // index in imgs array
+      cell.onclick = () => openLightbox(idx);
+      cell.appendChild(img);
+      cell.appendChild(lbl);
+    } else {
+      cell.innerHTML = '<div class="gp-render-placeholder"><div style="font-size:20px;opacity:0.15">✦</div><div>Render ' + (i+1) + '</div></div>';
+    }
+    renderGrid.appendChild(cell);
+  }
+
+  // Info strip
+  const infoStrip = document.getElementById('gp-info-strip');
+  infoStrip.innerHTML = `
+    <div class="gp-info-block"><div class="gp-info-label">Price / Rate</div><div class="gp-info-value ${p.isLease ? 'blue' : 'gold'}">${p.price}</div></div>
+    <div class="gp-info-block"><div class="gp-info-label">Property Type</div><div class="gp-info-value">${p.type}</div></div>
+    <div class="gp-info-block"><div class="gp-info-label">Status</div><div class="gp-info-value">${p.status}</div></div>
+    <div class="gp-info-block"><div class="gp-info-label">Market</div><div class="gp-info-value">Tucson, AZ</div></div>
+    <div class="gp-info-block"><div class="gp-info-label">Broker</div><div class="gp-info-value">KAM Commercial</div></div>
+  `;
+
+  // lightbox images
+  lbImages = imgs;
+
+  document.getElementById('gallery-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function heroNav(dir) {
+  const imgs = PROPERTIES[currentPropId].images;
+  if (!imgs.length) return;
+  currentHeroIdx = (currentHeroIdx + dir + imgs.length) % imgs.length;
+  const heroImg = document.getElementById('gp-hero-img');
+  heroImg.style.opacity = '0';
+  setTimeout(() => {
+    heroImg.src = imgs[currentHeroIdx].src;
+    heroImg.style.opacity = '1';
+    document.getElementById('gp-hero-label').textContent = imgs[currentHeroIdx].label || '';
+    document.getElementById('gp-hero-sublabel').textContent = imgs[currentHeroIdx].sublabel || '';
+    document.getElementById('gp-hero-counter').textContent = (currentHeroIdx + 1) + ' / ' + imgs.length;
+  }, 180);
+}
+
+function closeGallery(e) {
+  if (e.target === document.getElementById('gallery-overlay')) closeGalleryBtn();
+}
+function closeGalleryBtn() {
+  document.getElementById('gallery-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Lightbox
+function openLightbox(imgIdx) {
+  if (!lbImages[imgIdx]) return;
+  lbIdx = imgIdx;
+  document.getElementById('lb-img').src = lbImages[lbIdx].src;
+  document.getElementById('lb-cap').textContent = lbImages[lbIdx].label || '';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+function lbNav(dir) {
+  lbIdx = (lbIdx + dir + lbImages.length) % lbImages.length;
+  document.getElementById('lb-img').src = lbImages[lbIdx].src;
+  document.getElementById('lb-cap').textContent = lbImages[lbIdx].label || '';
+}
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') { closeLightbox(); closeGalleryBtn(); }
+});
+
+// ── FILTER / TAB ──
+let activeTab = 'all';
+function filterTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('.nav-tab').forEach((el, i) => {
+    const tabs = ['all', 'sale', 'lease', 'land'];
+    el.classList.toggle('active', tabs[i] === tab);
+  });
+  if (tab === 'sale') document.getElementById('statusFilter').value = 'sale';
+  else if (tab === 'lease') document.getElementById('statusFilter').value = 'lease';
+  else if (tab === 'land') { document.getElementById('statusFilter').value = ''; document.getElementById('typeFilter').value = 'Land'; }
+  else { document.getElementById('statusFilter').value = ''; if (tab === 'all') document.getElementById('typeFilter').value = ''; }
+  applyFilters();
+}
+
+function toggleChip(id) {
+  const el = document.getElementById('chip-' + id);
+  el.classList.toggle('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const typeVal = document.getElementById('typeFilter').value;
+  const statusVal = document.getElementById('statusFilter').value;
+  const cards = document.querySelectorAll('.prop-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const t = card.dataset.type;
+    const s = card.dataset.status;
+    const o = card.dataset.opp === 'true';
+    let show = true;
+    if (typeVal && t !== typeVal) show = false;
+    if (statusVal && s !== statusVal) show = false;
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('results-count').textContent = visible + ' propert' + (visible === 1 ? 'y' : 'ies');
+  document.getElementById('view-label').textContent = 'Showing ' + visible + ' KAM Commercial propert' + (visible === 1 ? 'y' : 'ies') + ' · Tucson, AZ';
+
+  // Toggle section headers
+  const saleCards = document.querySelectorAll('#sale-grid .prop-card');
+  const leaseCards = document.querySelectorAll('#lease-grid .prop-card');
+  const saleVisible = [...saleCards].filter(c => c.style.display !== 'none').length;
+  const leaseVisible = [...leaseCards].filter(c => c.style.display !== 'none').length;
+  document.getElementById('sale-header').style.display = saleVisible ? '' : 'none';
+  document.getElementById('lease-header').style.display = leaseVisible ? '' : 'none';
+}
+
+// ── IMAGE INJECTION API ──
+// To add an image to a property: window.addImage('sale-01', { src: '...base64...', label: 'Aerial View', sublabel: 'High altitude drone' })
+// The first image added becomes the hero; subsequent images become renders.
+window.addImage = function(propId, imageObj) {
+  if (!PROPERTIES[propId]) { console.warn('Unknown property:', propId); return; }
+  PROPERTIES[propId].images.push(imageObj);
+  
+  // Update card thumbnail if first image
+  const cardImgWrap = document.getElementById('card-img-' + propId);
+  if (cardImgWrap && PROPERTIES[propId].images.length === 1) {
+    cardImgWrap.innerHTML = '<img src="' + imageObj.src + '" alt="' + imageObj.label + '">';
+  }
+  console.log('Image added to', propId, '— total images:', PROPERTIES[propId].images.length);
+};
+</script>
+</body>
+</html>
